@@ -1,0 +1,68 @@
+# chkconfig: 345 26 74
+#!/bin/bash
+if [ -z $1 ]
+then echo "Usage: start|stop|reload"
+else
+
+case $1 in
+start)
+if [ -e /opt/php/var/run/php-fpm.pid ]
+then
+echo -e -n "Php-fpm is already running\t" "'\033[40;31m[Faild]'\r\n"
+tput sgr0
+else
+/opt/php/sbin/php-fpm -c /opt/php/lib/php.ini
+sleep 1
+pid=`ps aux|grep "php-fpm: master process"|grep -v grep|awk -F " " '{print $2}'`
+if [ "$pid" == "" ]
+then
+echo -e -n "Start php-fpm failed!!!!\t" "'\033[40;31m[Faild]'\r\n"
+tput sgr0
+else
+echo -e -n "Start php-fpm succeed,PID=$pid\t" "'\033[40;32m[OK]'\r\n"
+tput sgr0
+fi
+fi
+;;
+
+stop)
+/usr/bin/killall -SIGQUIT php-fpm >/dev/null 2>&1
+rm -f /opt/php/var/run/php-fpm.pid
+sleep 2
+pid=`ps aux|grep "php-fpm: master process"|grep -v grep|awk -F " " '{print $2}'`
+if [ "$pid" == "" ]
+then
+echo -e -n "Stop php-fpm succeed\t" "'\033[40;32m[OK]'\r\n"
+tput sgr0
+else
+echo -e -n "Start php-fpm failed\t" "'\033[40;31m[Faild]'\r\n"
+tput sgr0
+fi
+;;
+
+reload)
+if [ -e /opt/php/var/run/php-fpm.pid ]
+then
+pid=`cat /opt/php/var/run/php-fpm.pid`
+/bin/kill -SIGUSR2 `cat /opt/php/var/run/php-fpm.pid`
+sleep 1
+pidnew=`ps aux|grep "php-fpm: master process"|grep -v grep|awk -F " " '{print $2}'`
+if [ "$pid" == "$pidnew" ]
+then
+echo -e -n "Reload php-fpm failed!!!!\t" "'\033[40;31m[Faild]'\r\n"
+tput sgr0
+else
+echo -e -n "Reload php-fpm succeed \t" "'\033[40;32m[OK]'\r\n"
+tput sgr0
+fi
+else
+echo -e -n "Php-fpm is not running\t" "'\033[40;31m[Faild]'\r\n"
+tput sgr0
+fi
+;;
+
+*)
+echo "Usage: start|stop|reload"
+esac
+fi
+
