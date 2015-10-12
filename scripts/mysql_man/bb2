@@ -1,0 +1,1 @@
+select user_id,profile_id from profile_map as a  where   exists (select 1 from t_20150309.profile_id as b where a.profile_id=b.profile_id);

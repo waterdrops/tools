@@ -1,0 +1,12 @@
+db4 /dev/sda1             917G  3.7G  867G   1% /
+db4 tmpfs                  32G     0   32G   0% /dev/shm
+db4 /dev/sdb1             1.7T  761G  806G  49% /data
+db3 /dev/sda1             917G  4.0G  866G   1% /
+db3 tmpfs                  32G     0   32G   0% /dev/shm
+db3 /dev/sdb1             1.7T  1.2T  373G  77% /data
+db1 /dev/sda1             917G  7.8G  863G   1% /
+db1 tmpfs                  32G     0   32G   0% /dev/shm
+db1 /dev/sdb1             1.7T  884G  682G  57% /data
+db2 /dev/sda1             917G  3.7G  867G   1% /
+db2 tmpfs                  32G     0   32G   0% /dev/shm
+db2 /dev/sdb1             1.7T  862G  704G  56% /data

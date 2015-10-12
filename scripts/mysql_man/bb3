@@ -1,0 +1,1 @@
+select a.profile_id,a.last_update_time,c.user_id,c.define_id,c.reg_time from t_20150309.profile_id a inner join t_20150309.user_id b on a.profile_id=b.profile_id inner join user c on b.user_id=c.user_id where platform_id=0

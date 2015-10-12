@@ -1,0 +1,1 @@
+select profile_id,name,profile, version,md5,last_update_time  from profile   where  name ='Smartbean'   
